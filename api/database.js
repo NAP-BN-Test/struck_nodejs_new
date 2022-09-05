@@ -49,16 +49,68 @@ module.exports = {
         },
     },
     configDBCustomer: {
-        user: 'sa',
-        password: '1234',
-        server: 'localhost',
-        database: 'CustomerUser',
+        user: 'struck_user',
+        password: '123456a$',
+        server: 'dbdev.namanphu.vn',
+        database: 'STRUCK_CUSTOMER_DB',
         options: {
             encrypt: false,
         },
     },
-    connectDatabase: async function () {
+    connectDBCustomer: async function() {
+        const db = new Sequelize(this.configDBCustomer.database, this.configDBCustomer.user, this.configDBCustomer.password, {
+            host: this.configDBCustomer.server,
+            dialect: 'mssql',
+            operatorsAliases: '0',
+            // Bắt buộc phải có
+            dialectOptions: {
+                options: { encrypt: false }
+            },
+            pool: {
+                max: 5,
+                min: 0,
+                acquire: 30000,
+                idle: 10000
+            },
+            define: {
+                timestamps: false,
+                freezeTableName: true
+            }
+        });
+
+        db.authenticate()
+            .then(() => console.log('Ket noi thanh cong'))
+            .catch(err => console.log(err.message));
+        return db;
+    },
+    connectDatabase: async function() {
         const db = new Sequelize(this.config.database, this.config.user, this.config.password, {
+            host: this.config.server,
+            dialect: 'mssql',
+            operatorsAliases: '0',
+            // Bắt buộc phải có
+            dialectOptions: {
+                options: { encrypt: false }
+            },
+            pool: {
+                max: 5,
+                min: 0,
+                acquire: 30000,
+                idle: 10000
+            },
+            define: {
+                timestamps: false,
+                freezeTableName: true
+            }
+        });
+
+        db.authenticate()
+            .then(() => console.log('Ket noi thanh cong'))
+            .catch(err => console.log(err.message));
+        return db;
+    },
+    connectDatabaseWithNameDB: async function(dbName) {
+        const db = new Sequelize(dbName, this.config.user, this.config.password, {
             host: this.config.server,
             dialect: 'mssql',
             operatorsAliases: '0',
@@ -85,7 +137,7 @@ module.exports = {
     },
     // -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    checkServerInvalid: async function (userID) {
+    checkServerInvalid: async function(userID) {
         let customer;
         try {
             await connectDatabase(this.config.database, this.config.user, this.config.password, this.config.server).then(async dbCustomer => {
@@ -104,8 +156,7 @@ module.exports = {
             if (customer) {
                 let db = await connectDatabase(customer.DatabaseName, customer.UsernameDB, customer.PassworDB, customer.ServerIP);
                 return db;
-            }
-            else return null;
+            } else return null;
         } catch (error) {
             console.log(error);
             return null;
@@ -114,7 +165,7 @@ module.exports = {
 
     // -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    updateTable: async function (listObj, table, id) {
+    updateTable: async function(listObj, table, id) {
         let updateObj = {};
         for (let field of listObj) {
             updateObj[field.key] = field.value
