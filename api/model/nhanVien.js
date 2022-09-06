@@ -8,7 +8,7 @@ module.exports = function(db) {
             autoIncrement: true
         },
         IDLoaiNhanVien: Sequelize.BIGINT,
-        TemNhanVien: Sequelize.STRING,
+        TenNhanVien: Sequelize.STRING,
         MaNhanVien: Sequelize.STRING,
         PhoneNumber: Sequelize.STRING,
         Birthday: Sequelize.STRING,

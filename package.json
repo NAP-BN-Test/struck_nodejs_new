@@ -9,7 +9,7 @@
   "author": "tungnn",
   "license": "ISC",
   "dependencies": {
-    "@pdftron/pdfnet-node": "^8.1.0",
+    "@pdftron/pdfnet-node": "^9.3.0",
     "awesome-unoconv": "^1.0.1",
     "axios": "^0.20.0",
     "body-parser": "^1.19.0",
@@ -41,6 +41,8 @@
     "sequelize-auto": "^0.5.4",
     "sequelize-cli": "^6.2.0",
     "socket.io": "^2.3.0",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0",
     "tedious": "^9.2.1",
     "web-push": "^3.4.5",
     "word2pdf": "0.0.1-security",

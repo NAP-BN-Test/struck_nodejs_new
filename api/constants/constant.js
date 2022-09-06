@@ -59,10 +59,10 @@ module.exports = {
     },
 
     TIME_TYPE: {
-        HOUR: 1,  //Giờ
-        DAY: 2,   //Thứ trong tuần
-        DATE: 3,   //Ngày trong tháng
-        MONTH: 4   //Tháng trong năm
+        HOUR: 1, //Giờ
+        DAY: 2, //Thứ trong tuần
+        DATE: 3, //Ngày trong tháng
+        MONTH: 4 //Tháng trong năm
     },
 
     STATUS_APPROVAL: {

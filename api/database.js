@@ -40,18 +40,18 @@ module.exports = {
     //     },
     // },
     config: {
-        user: 'sa',
-        password: 'Viet@solution$213%171^198',
-        server: '103.154.100.26',
+        user: 'tungnn',
+        password: 'tung@1998',
+        server: '103.137.184.193',
         database: 'TXAGELESS_QLNB', // GELESS_QLNB con demo
         options: {
             encrypt: false,
         },
     },
     configDBCustomer: {
-        user: 'struck_user',
-        password: '123456a$',
-        server: 'dbdev.namanphu.vn',
+        user: 'tungnn',
+        password: 'tung@1998',
+        server: '103.137.184.193',
         database: 'STRUCK_CUSTOMER_DB',
         options: {
             encrypt: false,

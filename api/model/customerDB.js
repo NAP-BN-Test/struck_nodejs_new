@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = function(db) {
-    var table = db.define('tblCustomerDB', {
+    var table = db.define('CustomerDB', {
         ID: {
             type: Sequelize.BIGINT,
             primaryKey: true,
@@ -10,7 +10,7 @@ module.exports = function(db) {
         IDCustomer: Sequelize.BIGINT,
         UserName: Sequelize.STRING,
         Password: Sequelize.STRING,
-        NameDatabase: Sequelize.STRING,
+        NameDB: Sequelize.STRING,
         Status: Sequelize.BOOLEAN,
         KeyLicense: Sequelize.STRING,
         KeyConnect: Sequelize.STRING,
