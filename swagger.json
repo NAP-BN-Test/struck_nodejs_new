@@ -1,0 +1,199 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Yet Another Node.js Blogg Application API",
+        "description": "Yet Another Node.js Blogg Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3300",
+    "basePath": "/",
+    "tags": [{
+            "name": "Login",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Customer",
+            "description": "API for customer in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [{
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer"
+        }
+    }],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "description": "Login user",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "login",
+                    "in": "body",
+                    "description": "User login",
+                    "schema": {
+                        "$ref": "#/definitions/login"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Đăng nhập thành công",
+                        "schema": {
+                            "$ref": "#/definitions/login"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/loginDB": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "description": "Login admin",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "login",
+                    "in": "body",
+                    "description": "User login",
+                    "schema": {
+                        "$ref": "#/definitions/loginDB"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Đăng nhập thành công",
+                        "schema": {
+                            "$ref": "#/definitions/login"
+                        }
+                    }
+                },
+                "security": [{
+                    "bearerAuth": []
+                }]
+            }
+        },
+        "/changePassword": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "description": "Chang passwprd",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "login",
+                    "in": "body",
+                    "description": "User login",
+                    "schema": {
+                        "$ref": "#/definitions/changePassword"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Đổi mật  khẩu thành công",
+                        "schema": {
+                            "$ref": "#/definitions/changePassword"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+        },
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "login": {
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "loginDB": {
+            "properties": {
+                "userName": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "changePassword": {
+            "properties": {
+                "userName": {
+                    "type": "string"
+                },
+                "rePassword": {
+                    "type": "string"
+                },
+                "newPassword": {
+                    "type": "string"
+                },
+                "staffID": {
+                    "type": "string"
+                },
+                "dbName": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+
+
+}

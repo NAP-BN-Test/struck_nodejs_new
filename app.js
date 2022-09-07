@@ -19,6 +19,11 @@ app.use(session({
     }
 }))
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 app.use(cors())
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }))
 app.use(bodyParser.json({ limit: '100mb' }))
@@ -28,8 +33,7 @@ server.listen(port, function() {
     console.log('http://localhost:' + port);
 });
 let routes = require('./api/router') //importing route
-
-// Initializes passport and passport sessions
+    // Initializes passport and passport sessions
 const passport = require('passport')
 app.use(passport.initialize());
 app.use(passport.session());
