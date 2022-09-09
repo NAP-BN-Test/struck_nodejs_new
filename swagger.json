@@ -21,7 +21,8 @@
         }
     ],
     "schemes": [
-        "http"
+        "http",
+        "https"
     ],
     "consumes": [
         "application/json"
@@ -29,12 +30,9 @@
     "produces": [
         "application/json"
     ],
-    "security": [{
-        "bearerAuth": {
-            "type": "http",
-            "scheme": "bearer"
-        }
-    }],
+    "security": {
+        "bearerAuth": []
+    },
     "paths": {
         "/login": {
             "post": {
@@ -125,6 +123,109 @@
                     "Bearer": []
                 }]
             }
+        },
+        "/getListCustomerDB": {
+            "get": {
+                "parameters": [{
+                    "name": "itemPerPage",
+                    "description": "Số lượng hiển thị",
+                    "type": "integer",
+                    "in": "query"
+                }, {
+                    "name": "page",
+                    "description": "Số trang",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Lấy danh sách khách hàng trong db admin",
+                "description": "",
+                "operationId": "Lấy danh sách khách hàng trong db admin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/getListCustomerDB"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearerAuth": []
+                }]
+            }
+        },
+        "/cutomer/add_tblKhachHang": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "description": "Add customer",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "Customer",
+                    "in": "body",
+                    "description": "Them moi khach hang",
+                    "schema": {
+                        "$ref": "#/definitions/customerAddUpdate"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Đăng nhập thành công",
+                        "schema": {
+                            "$ref": "#/definitions/customerAddUpdate"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/cutomer/update_tblKhachHang": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "description": "Update customer",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "Customer",
+                    "in": "body",
+                    "description": "Update info customer",
+                    "schema": {
+                        "$ref": "#/definitions/customerAddUpdate"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Đăng nhập thành công",
+                        "schema": {
+                            "$ref": "#/definitions/customerAddUpdate"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
         }
     },
     "securityDefinitions": {
@@ -166,6 +267,20 @@
                 }
             }
         },
+        "getListCustomerDB": {
+            "type": "object",
+            "properties": {
+                "itemPerPage": {
+                    "type": "integer"
+                },
+                "page": {
+                    "type": "integer"
+                }
+            },
+            "xml": {
+                "name": "Company"
+            }
+        },
         "changePassword": {
             "properties": {
                 "userName": {
@@ -184,13 +299,73 @@
                     "type": "string"
                 }
             }
+        },
+        "customerAddUpdate": {
+            "xml": {
+                "name": "Product"
+            },
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "maKhachHang": {
+                    "type": "string"
+                },
+                "tenKhachHang": {
+                    "type": "string"
+                },
+                "tenVietTat": {
+                    "type": "string"
+                },
+                "loaiKhachHang": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "cmt": {
+                    "type": "string"
+                },
+                "soDuDauKy": {
+                    "type": "float"
+                },
+                "idPhuongPhapThanhToan": {
+                    "type": "integer"
+                },
+                "hanMuc": {
+                    "type": "float"
+                },
+                "startDatePay": {
+                    "type": "string"
+                },
+                "endDatePay": {
+                    "type": "string"
+                },
+                "createDate": {
+                    "type": "string"
+                },
+                "updateDate": {
+                    "type": "string"
+                },
+                "deleted": {
+                    "type": "boolean"
+                }
+            }
         }
     },
     "components": {
         "securitySchemes": {
-            "BearerAuth": {
+            "bearerAuth": {
                 "type": "http",
-                "scheme": "bearer"
+                "scheme": "basic",
+                "bearerFormat": "JWT"
             }
         }
     }

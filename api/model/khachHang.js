@@ -7,8 +7,7 @@ module.exports = function(db) {
             primaryKey: true,
             autoIncrement: true
         },
-        IDPhuongPhapThanhToan: Sequelize.BIGINT,
-        MaKhachHang: Sequelize.BIGINT,
+        MaKhachHang: Sequelize.STRING,
         TenKhachHang: Sequelize.STRING,
         TenVietTat: Sequelize.STRING,
         LoaiKhachHang: Sequelize.STRING,
@@ -16,20 +15,14 @@ module.exports = function(db) {
         PhoneNumber: Sequelize.STRING,
         Email: Sequelize.STRING,
         CMT: Sequelize.STRING,
-        Zalo: Sequelize.STRING,
-        LoaiTinNhan: Sequelize.STRING,
-        TrangThai: Sequelize.BOOLEAN,
         SoDuDauKy: Sequelize.FLOAT,
+        IDPhuongPhapThanhToan: Sequelize.BIGINT,
         HanMuc: Sequelize.FLOAT,
-        IDCustomer: Sequelize.BIGINT,
-        KeyConnect: Sequelize.STRING,
-        // PhuongPhapThanhToan: Sequelize.STRING,
-        // Contacts: Sequelize.STRING,
-        // AccountBankings: Sequelize.STRING,
-        // Khos: Sequelize.STRING,
-        // Xes: Sequelize.STRING,
-        // Zalos: Sequelize.STRING,
-
+        StartDatePay: Sequelize.NOW,
+        EndDatePay: Sequelize.NOW,
+        Deleted: Sequelize.BOOLEAN,
+        CreateDate: Sequelize.NOW,
+        UpdateDate: Sequelize.NOW,
     });
 
     return table;

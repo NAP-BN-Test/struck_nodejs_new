@@ -182,7 +182,7 @@ module.exports = {
 
     },
     getListCustomerDB: (req, res) => {
-        let body = req.body;
+        let params = req.query;
         database.connectDBCustomer().then(async custommerDB => {
             if (custommerDB) {
                 try {
@@ -192,8 +192,8 @@ module.exports = {
                         order: [
                             ['ID', 'DESC']
                         ],
-                        offset: Number(body.itemPerPage) * (Number(body.page) - 1),
-                        limit: Number(body.itemPerPage),
+                        offset: Number(params.itemPerPage) * (Number(params.page) - 1),
+                        limit: Number(params.itemPerPage),
                     }).then(async data => {
                         var array = [];
                         data.forEach(element => {

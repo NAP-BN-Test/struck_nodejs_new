@@ -43,7 +43,7 @@ module.exports = {
         user: 'tungnn',
         password: 'tung@1998',
         server: '103.137.184.193',
-        database: 'TXAGELESS_QLNB', // GELESS_QLNB con demo
+        database: 'STRUCK_DB_ROOT', // GELESS_QLNB con demo
         options: {
             encrypt: false,
         },
