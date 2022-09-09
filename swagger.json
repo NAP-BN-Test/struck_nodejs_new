@@ -18,6 +18,34 @@
         {
             "name": "Customer",
             "description": "API for customer in the system"
+        },
+        {
+            "name": "Company car",
+            "description": "In the system"
+        },
+        {
+            "name": "Shell type",
+            "description": "In the system"
+        },
+        {
+            "name": "Car type",
+            "description": "In the system"
+        },
+        {
+            "name": "Carriers",
+            "description": "In the system"
+        },
+        {
+            "name": "Order type",
+            "description": "In the system"
+        },
+        {
+            "name": "Payment methods",
+            "description": "In the system"
+        },
+        {
+            "name": "Staff",
+            "description": "In the system"
         }
     ],
     "schemes": [
@@ -156,7 +184,7 @@
                             "type": "object",
                             "properties": {
                                 "result": {
-                                    "$ref": "#/definitions/getListCustomerDB"
+                                    "$ref": "#/definitions/page"
                                 }
                             }
                         }
@@ -226,6 +254,149 @@
                     "Bearer": []
                 }]
             }
+        },
+        "/dmXeCongTy/add_DMXeCongTy": {
+            "post": {
+                "tags": [
+                    "Company car"
+                ],
+                "description": "Company car",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "Company car",
+                    "in": "body",
+                    "description": "Company car",
+                    "schema": {
+                        "$ref": "#/definitions/companycar"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Thêm thành công",
+                        "schema": {
+                            "$ref": "#/definitions/companycar"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/dmXeCongTy/update_DMXeCongTy": {
+            "post": {
+                "tags": [
+                    "Company car"
+                ],
+                "description": "Company car",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "Company car",
+                    "in": "body",
+                    "description": "Company car",
+                    "schema": {
+                        "$ref": "#/definitions/companycar"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Cập nhật thành công",
+                        "schema": {
+                            "$ref": "#/definitions/companycar"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/dmXeCongTy/get_list_DMXeCongTy": {
+            "get": {
+                "tags": [
+                    "Company car"
+                ],
+                "description": "Company car",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "itemPerPage",
+                    "description": "Số lượng hiển thị",
+                    "type": "integer",
+                    "in": "query"
+                }, {
+                    "name": "page",
+                    "description": "Số trang",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "$ref": "#/definitions/page"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/dmXeCongTy/get_list_name_DMXeCongTy": {
+            "get": {
+                "tags": [
+                    "Company car"
+                ],
+                "description": "Company car",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "$ref": "#/definitions/page"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/dmXeCongTy/delete_DMXeCongTy": {
+            "delete": {
+                "tags": [
+                    "Company car"
+                ],
+                "description": "Company car",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "listID",
+                    "description": "array id cần xoá",
+                    "type": "array",
+                    "in": "query"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "$ref": "#/definitions/listIDDelete"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
         }
     },
     "securityDefinitions": {
@@ -267,7 +438,7 @@
                 }
             }
         },
-        "getListCustomerDB": {
+        "page": {
             "type": "object",
             "properties": {
                 "itemPerPage": {
@@ -357,6 +528,67 @@
                 "deleted": {
                     "type": "boolean"
                 }
+            }
+        },
+        "companycar": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "bienSoXe": {
+                    "type": "string"
+                },
+                "loaiDauKeo": {
+                    "type": "string"
+                },
+                "soRoMooc": {
+                    "type": "string"
+                },
+                "loaiSoMi": {
+                    "type": "string"
+                },
+                "gps": {
+                    "type": "string"
+                },
+                "tenLaiXe": {
+                    "type": "string"
+                },
+                "soCMT": {
+                    "type": "string"
+                },
+                "soBangLai": {
+                    "type": "string"
+                },
+                "soDangKiem": {
+                    "type": "string"
+                },
+                "ngayHetHanDK": {
+                    "type": "string"
+                },
+                "soBHTNDS": {
+                    "type": "string"
+                },
+                "ngayHetHanBHTNDS": {
+                    "type": "string"
+                },
+                "dinhMuc": {
+                    "type": "float"
+                },
+                "thongSoKyThuat": {
+                    "type": "string"
+                }
+            }
+        },
+        "listIDDelete": {
+            "type": "object",
+            "properties": {
+                "listID": {
+                    "type": "array"
+                }
+            },
+            "xml": {
+                "name": "Company"
             }
         }
     },

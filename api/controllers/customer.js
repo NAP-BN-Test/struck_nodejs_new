@@ -208,7 +208,7 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    let listID = JSON.parse(body.listID);
+                    let listID = body.listID.split(',');
                     await deleteRelationshiptblKhachHang(db, listID);
                     var result = {
                         status: Constant.STATUS.SUCCESS,

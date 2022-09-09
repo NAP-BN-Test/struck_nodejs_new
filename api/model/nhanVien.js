@@ -16,7 +16,6 @@ module.exports = function(db) {
         Address: Sequelize.STRING,
         Username: Sequelize.STRING,
         Password: Sequelize.STRING,
-        // DBName: Sequelize.STRING,
 
     });
 
