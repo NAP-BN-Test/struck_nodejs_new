@@ -32,7 +32,9 @@ module.exports = {
                             })
                             if (staff) {
                                 var payload = {
-                                        "Username": body.userName,
+                                        "userID": staff.ID,
+                                        "username": staff.Username,
+                                        "password": staff.Password,
                                         // standard fields
                                         // - Xác thực người tạo
                                         "iss": "Tungnn",
@@ -90,10 +92,21 @@ module.exports = {
                             Password: body.password ? body.password : ''
                         }
                     })
+                    var payload = {
+                            "customeID": dbCus.ID,
+                            // standard fields
+                            // - Xác thực người tạo
+                            "iss": "Tungnn",
+                        }
+                        // payload = { username: 'haidn', password: '123456a$' }
+                    let token = jwt.sign(payload,
+                        'struck2022*#', { expiresIn: '30d' }
+                    );
                     if (dbCus) {
                         var result = {
                             status: Constant.STATUS.SUCCESS,
                             message: Constant.MESSAGE.LOGIN_SUCCESS,
+                            token: token,
                         }
                         res.json(result);
                     } else {

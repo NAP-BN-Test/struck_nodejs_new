@@ -6,6 +6,8 @@ module.exports = function(app) {
     app.route('/auth/changePassword').patch(login.changePassword);
     app.route('/auth/CustomerDB').get(login.getListCustomerDB);
 
+    app.route('/auth/decodeToken').get(checkToken.decodeToken);
+
     var customerCtl = require('./controllers/customer');
     app.route('/cutomer').get(checkToken.checkToken, customerCtl.getListtblKhachHang);
     app.route('/cutomers').get(checkToken.checkToken, customerCtl.detailtblKhachHang);
@@ -74,5 +76,14 @@ module.exports = function(app) {
     app.route('/currency').get(checkToken.checkToken, ctlTienTe.getListtblTienTe);
     app.route('/currencys').get(checkToken.checkToken, ctlTienTe.detailtblTienTe);
     app.route('/currency').delete(checkToken.checkToken, ctlTienTe.deletetblTienTe);
+
+    var ctlStaff = require('./controllers/nhanvien');
+    app.route('/staff').post(checkToken.checkToken, ctlStaff.addNhanVien);
+    app.route('/staff').put(checkToken.checkToken, ctlStaff.updateNhanVien);
+    app.route('/staff').delete(checkToken.checkToken, ctlStaff.deleteNhanVien);
+    app.route('/staff').get(checkToken.checkToken, ctlStaff.getListNhanVien);
+    app.route('/staffs').get(checkToken.checkToken, ctlStaff.getListNameNhanVien);
+    app.route('/staffs/id').get(checkToken.checkToken, ctlStaff.detailNhanVien);
+
 
 }
