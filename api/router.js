@@ -60,4 +60,10 @@ module.exports = function(app) {
     app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.getListLoaiHinhVanChuyen);
     app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.deleteLoaiHinhVanChuyen);
 
+    var ctlTienTe = require('./controllers/ctlTienTe');
+    app.route('/currency').post(checkToken.checkToken, ctlTienTe.addtblTienTe);
+    app.route('/currency').put(checkToken.checkToken, ctlTienTe.updatetblTienTe);
+    app.route('/currency').get(checkToken.checkToken, ctlTienTe.getListtblTienTe);
+    app.route('/currency').delete(checkToken.checkToken, ctlTienTe.deletetblTienTe);
+
 }

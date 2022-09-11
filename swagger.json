@@ -46,6 +46,10 @@
         {
             "name": "Staff type",
             "description": "In the system"
+        },
+        {
+            "name": "Currency",
+            "description": "In the system"
         }
     ],
     "schemes": [
@@ -1178,6 +1182,131 @@
                     "Bearer": []
                 }]
             }
+        },
+        "/currency": {
+            "post": {
+                "tags": [
+                    "Currency"
+                ],
+                "description": "Add currency",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "Customer",
+                    "in": "body",
+                    "description": "Them moi loai tien te",
+                    "schema": {
+                        "$ref": "#/definitions/currencyAddUpdate"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Them moi thanh cong",
+                        "schema": {
+                            "$ref": "#/definitions/outputBasic"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            },
+            "get": {
+                "parameters": [{
+                    "name": "itemPerPage",
+                    "description": "Số lượng hiển thị",
+                    "type": "integer",
+                    "in": "query"
+                }, {
+                    "name": "page",
+                    "description": "Số trang",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Currency"
+                ],
+                "summary": "",
+                "description": "Lay danh sach tien te",
+                "operationId": "Lay danh sach tien te",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/currencyAddUpdate"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            },
+            "put": {
+                "tags": [
+                    "Currency"
+                ],
+                "description": "Update currency",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "Currency",
+                    "in": "body",
+                    "description": "Cap nhat tien te",
+                    "schema": {
+                        "$ref": "#/definitions/currencyAddUpdate"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Cap nhat thanh cong",
+                        "schema": {
+                            "$ref": "#/definitions/outputBasic"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            },
+            "delete": {
+                "tags": [
+                    "Currency"
+                ],
+                "description": "Delete curency",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "listID",
+                    "description": "Số lượng hiển thị",
+                    "type": "array",
+                    "in": "query"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Xoa thanh cong",
+                        "schema": {
+                            "$ref": "#/definitions/outputBasic"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
         }
     },
     "securityDefinitions": {
@@ -1491,6 +1620,23 @@
                     "type": "string"
                 },
                 "ghiChu": {
+                    "type": "string"
+                }
+            }
+        },
+        "currencyAddUpdate": {
+            "xml": {
+                "name": "Product"
+            },
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "tenVietTat": {
+                    "type": "string"
+                },
+                "tenDayDu": {
                     "type": "string"
                 }
             }
