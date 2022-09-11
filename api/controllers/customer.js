@@ -100,6 +100,7 @@ module.exports = {
                     }).then(data => {
                         if (data) {
                             var result = {
+                                data: data,
                                 status: Constant.STATUS.SUCCESS,
                                 message: Constant.MESSAGE.ACTION_SUCCESS,
                             }

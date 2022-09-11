@@ -1,23 +1,23 @@
 module.exports = function(app) {
     var checkToken = require('./constants/token');
     var login = require('./controllers/login');
-    app.route('/login').post(login.login);
-    app.route('/loginDB').post(login.loginDB);
-    app.route('/changePassword').post(login.changePassword);
-    app.route('/getListCustomerDB').get(login.getListCustomerDB);
+    app.route('/auth/login').post(login.login);
+    app.route('/auth/loginDB').post(login.loginDB);
+    app.route('/auth/changePassword').patch(login.changePassword);
+    app.route('/auth/CustomerDB').get(login.getListCustomerDB);
 
     var customerCtl = require('./controllers/customer');
-    app.route('/cutomer/get_list_tblKhachHang').post(checkToken.checkToken, customerCtl.getListtblKhachHang);
-    app.route('/cutomer/add_tblKhachHang').post(checkToken.checkToken, customerCtl.addtblKhachHang);
-    app.route('/cutomer/update_tblKhachHang').post(checkToken.checkToken, customerCtl.updatetblKhachHang);
-    app.route('/cutomer/delete_tblKhachHang').post(checkToken.checkToken, customerCtl.deletetblKhachHang);
+    app.route('/cutomer').get(checkToken.checkToken, customerCtl.getListtblKhachHang);
+    app.route('/cutomer').post(checkToken.checkToken, customerCtl.addtblKhachHang);
+    app.route('/cutomer').put(checkToken.checkToken, customerCtl.updatetblKhachHang);
+    app.route('/cutomer').delete(checkToken.checkToken, customerCtl.deletetblKhachHang);
 
     var loaiVo = require('./controllers/loaivo');
-    app.route('/loaivo/add_Loaivo').post(checkToken.checkToken, loaiVo.addLoaiVo);
-    app.route('/loaivo/update_Loaivo').post(checkToken.checkToken, loaiVo.updateLoaiVo);
-    app.route('/loaivo/delete_Loaivo').post(checkToken.checkToken, loaiVo.deleteLoaiVo);
-    app.route('/loaivo/get_list_Loaivo').post(checkToken.checkToken, loaiVo.getListLoaiVo);
-    app.route('/loaivo/get_list_name_Loaivo').post(checkToken.checkToken, loaiVo.getListNameLoaiVo);
+    app.route('/tiretype').post(checkToken.checkToken, loaiVo.addLoaiVo);
+    app.route('/tiretype').put(checkToken.checkToken, loaiVo.updateLoaiVo);
+    app.route('/tiretype').delete(checkToken.checkToken, loaiVo.deleteLoaiVo);
+    app.route('/tiretype').get(checkToken.checkToken, loaiVo.getListLoaiVo);
+    app.route('/tiretype').get(checkToken.checkToken, loaiVo.getListNameLoaiVo);
 
     var loaiXe = require('./controllers/loaixe');
     app.route('/loaixe/add_Loaixe').post(checkToken.checkToken, loaiXe.addLoaiXe);

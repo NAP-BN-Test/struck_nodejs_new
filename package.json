@@ -48,10 +48,14 @@
     "tedious": "^9.2.1",
     "web-push": "^3.4.5",
     "word2pdf": "0.0.1-security",
+    "yarn": "^1.22.19",
     "youtube-channel-videos": "^1.0.0",
     "youtube-search": "^1.1.6",
     "youtube-v3-api": "^1.1.1",
     "zalo-sdk": "^2.0.4",
     "zapoj-office-to-pdf": "^1.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
