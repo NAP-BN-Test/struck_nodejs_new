@@ -1,4 +1,5 @@
 const Constant = require('../constants/constant');
+const Modules = require('../constants/modules');
 const Op = require('sequelize').Op;
 const Result = require('../constants/result');
 var moment = require('moment');
@@ -80,6 +81,7 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
+                    console.log(body);
                     mtblKhachHang(db).create({
                         MaKhachHang: body.maKhachHang ? body.maKhachHang : null,
                         TenKhachHang: body.tenKhachHang ? body.tenKhachHang : null,
@@ -92,11 +94,11 @@ module.exports = {
                         SoDuDauKy: body.soDuDauKy ? body.soDuDauKy : null,
                         IDPhuongPhapThanhToan: body.idPhuongPhapThanhToan ? body.idPhuongPhapThanhToan : null,
                         HanMuc: body.hanMuc ? body.hanMuc : null,
-                        StartDatePay: body.startDatePay ? body.startDatePay : null,
-                        EndDatePay: body.endDatePay ? body.endDatePay : null,
+                        StartDatePay: body.startDatePay ? Modules.formatDatime(body.startDatePay) : null,
+                        EndDatePay: body.endDatePay ? Modules.formatDatime(body.endDatePay): null,
                         Deleted: body.deleted ? body.deleted : null,
-                        CreateDate: body.createDate ? body.createDate : null,
-                        UpdateDate: body.updateDate ? body.updateDate : null,
+                        CreateDate: body.createDate ? Modules.formatDatime(body.createDate) : null,
+                        UpdateDate: body.updateDate ? Modules.formatDatime(body.updateDate) : null,
                     }).then(data => {
                         if (data) {
                             var result = {
@@ -205,7 +207,7 @@ module.exports = {
     },
     // delete_tblKhachHang
     deletetblKhachHang: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
@@ -227,7 +229,7 @@ module.exports = {
     },
     // get_list_tblKhachHang
     getListtblKhachHang: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
@@ -294,7 +296,7 @@ module.exports = {
     },
     // get_list_name_tblKhachHang
     getListNametblKhachHang: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {

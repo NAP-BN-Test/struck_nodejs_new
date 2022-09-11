@@ -13,51 +13,51 @@ module.exports = function(app) {
     app.route('/cutomer').delete(checkToken.checkToken, customerCtl.deletetblKhachHang);
 
     var loaiVo = require('./controllers/loaivo');
-    app.route('/tiretype').post(checkToken.checkToken, loaiVo.addLoaiVo);
-    app.route('/tiretype').put(checkToken.checkToken, loaiVo.updateLoaiVo);
-    app.route('/tiretype').delete(checkToken.checkToken, loaiVo.deleteLoaiVo);
-    app.route('/tiretype').get(checkToken.checkToken, loaiVo.getListLoaiVo);
-    app.route('/tiretype').get(checkToken.checkToken, loaiVo.getListNameLoaiVo);
+    app.route('/shelltype').post(checkToken.checkToken, loaiVo.addLoaiVo);
+    app.route('/shelltype').put(checkToken.checkToken, loaiVo.updateLoaiVo);
+    app.route('/shelltype').delete(checkToken.checkToken, loaiVo.deleteLoaiVo);
+    app.route('/shelltype').get(checkToken.checkToken, loaiVo.getListLoaiVo);
+    // app.route('/tiretype').get(checkToken.checkToken, loaiVo.getListNameLoaiVo);
 
     var loaiXe = require('./controllers/loaixe');
-    app.route('/loaixe/add_Loaixe').post(checkToken.checkToken, loaiXe.addLoaiXe);
-    app.route('/loaixe/update_Loaixe').post(checkToken.checkToken, loaiXe.updateLoaiXe);
-    app.route('/loaixe/delete_loaixe').post(checkToken.checkToken, loaiXe.deleteLoaiXe);
-    app.route('/loaixe/get_list_loaixe').post(checkToken.checkToken, loaiXe.getListLoaiXe);
-    app.route('/loaixe/get_list_name_loaixe').post(checkToken.checkToken, loaiXe.getListNameLoaiXe);
+    app.route('/cartype').post(checkToken.checkToken, loaiXe.addLoaiXe);
+    app.route('/cartype').put(checkToken.checkToken, loaiXe.updateLoaiXe);
+    app.route('/cartype').delete(checkToken.checkToken, loaiXe.deleteLoaiXe);
+    app.route('/cartype').get(checkToken.checkToken, loaiXe.getListLoaiXe);
+    // app.route('typecar').get(checkToken.checkToken, loaiXe.getListNameLoaiXe);
 
     var dmXeCongTy = require('./controllers/dmxecongty');
-    app.route('/dmXeCongTy/add_DMXeCongTy').post(checkToken.checkToken, dmXeCongTy.addDMXeCongTy);
-    app.route('/dmXeCongTy/update_DMXeCongTy').post(checkToken.checkToken, dmXeCongTy.updateDMXeCongTy);
-    app.route('/dmXeCongTy/delete_DMXeCongTy').delete(checkToken.checkToken, dmXeCongTy.deleteDMXeCongTy);
-    app.route('/dmXeCongTy/get_list_DMXeCongTy').get(checkToken.checkToken, dmXeCongTy.getListDMXeCongTy);
-    app.route('/dmXeCongTy/get_list_name_DMXeCongTy').get(checkToken.checkToken, dmXeCongTy.getListNameDMXeCongTy);
+    app.route('/companycar').post(checkToken.checkToken, dmXeCongTy.addDMXeCongTy);
+    app.route('/companycar').put(checkToken.checkToken, dmXeCongTy.updateDMXeCongTy);
+    app.route('/companycar').delete(checkToken.checkToken, dmXeCongTy.deleteDMXeCongTy);
+    app.route('/companycar').get(checkToken.checkToken, dmXeCongTy.getListDMXeCongTy);
+    // app.route('companycar').get(checkToken.checkToken, dmXeCongTy.getListNameDMXeCongTy);
 
     var hangTau = require('./controllers/hangtau');
-    app.route('/hangTau/add_HangTau').post(checkToken.checkToken, hangTau.addHangTau);
-    app.route('/hangTau/update_HangTau').post(checkToken.checkToken, hangTau.updateHangTau);
-    app.route('/hangTau/delete_HangTau').post(checkToken.checkToken, hangTau.deleteHangTau);
-    app.route('/hangTau/get_list_HangTau').post(checkToken.checkToken, hangTau.getListHangTau);
-    app.route('/hangTau/get_list_name_HangTau').post(checkToken.checkToken, hangTau.getListNameHangTau);
+    app.route('/carriers').post(checkToken.checkToken, hangTau.addHangTau);
+    app.route('/carriers').put(checkToken.checkToken, hangTau.updateHangTau);
+    app.route('/carriers').delete(checkToken.checkToken, hangTau.deleteHangTau);
+    app.route('/carriers').get(checkToken.checkToken, hangTau.getListHangTau);
+    // app.route('/carriers').post(checkToken.checkToken, hangTau.getListNameHangTau);
 
     var phuongThucThanhToan = require('./controllers/phuongthucthanhtoan');
-    app.route('/phuongThucThanhToan/add_PhuongThucThanhToan').post(checkToken.checkToken, phuongThucThanhToan.addPhuongThucThanhToan);
-    app.route('/phuongThucThanhToan/update_PhuongThucThanhToan').post(checkToken.checkToken, phuongThucThanhToan.updatePhuongThucThanhToan);
-    app.route('/phuongThucThanhToan/delete_PhuongThucThanhToan').post(checkToken.checkToken, phuongThucThanhToan.deletePhuongThucThanhToan);
-    app.route('/phuongThucThanhToan/get_list_PhuongThucThanhToan').post(checkToken.checkToken, phuongThucThanhToan.getListPhuongThucThanhToan);
-    app.route('/phuongThucThanhToan/get_list_name_PhuongThucThanhToan').post(checkToken.checkToken, phuongThucThanhToan.getListNamePhuongThucThanhToan);
+    app.route('/paymentmethods').post(checkToken.checkToken, phuongThucThanhToan.addPhuongThucThanhToan);
+    app.route('/paymentmethods').put(checkToken.checkToken, phuongThucThanhToan.updatePhuongThucThanhToan);
+    app.route('/paymentmethods').delete(checkToken.checkToken, phuongThucThanhToan.deletePhuongThucThanhToan);
+    app.route('/paymentmethods').get(checkToken.checkToken, phuongThucThanhToan.getListPhuongThucThanhToan);
+    // app.route('/ordertype').post(checkToken.checkToken, phuongThucThanhToan.getListNamePhuongThucThanhToan);
 
     var loaiNhanVien = require('./controllers/loainhanvien');
-    app.route('/loaiNhaVien/add_LoaiNhanVien').post(checkToken.checkToken, loaiNhanVien.addLoaiNhanVien);
-    app.route('/loaiNhaVien/update_LoaiNhanVien').post(checkToken.checkToken, loaiNhanVien.updateLoaiNhanVien);
-    app.route('/loaiNhaVien/delete_LoaiNhanVien').post(checkToken.checkToken, loaiNhanVien.deleteLoaiNhanVien);
-    app.route('/loaiNhaVien/get_list_LoaiNhanVien').post(checkToken.checkToken, loaiNhanVien.getListLoaiNhanVien);
-    app.route('/loaiNhaVien/get_list_name_LoaiNhanVien').post(checkToken.checkToken, loaiNhanVien.getListNameLoaiNhanVien);
+    app.route('/stafftype').post(checkToken.checkToken, loaiNhanVien.addLoaiNhanVien);
+    app.route('/stafftype').put(checkToken.checkToken, loaiNhanVien.updateLoaiNhanVien);
+    app.route('/stafftype').delete(checkToken.checkToken, loaiNhanVien.deleteLoaiNhanVien);
+    app.route('/stafftype').get(checkToken.checkToken, loaiNhanVien.getListLoaiNhanVien);
+    // app.route('/stafftype').get(checkToken.checkToken, loaiNhanVien.getListNameLoaiNhanVien);
 
     var loaiHinhVanChuyen = require('./controllers/loaihinhvanchuyen');
-    app.route('/loaiHinhVanChuyen/add_LoaiHinhVanChuyen').post(checkToken.checkToken, loaiHinhVanChuyen.addLoaiHinhVanChuyen);
-    app.route('/loaiHinhVanChuyen/update_LoaiHinhVanChuyen').post(checkToken.checkToken, loaiHinhVanChuyen.updateLoaiHinhVanChuyen);
-    app.route('/loaiHinhVanChuyen/get_list_LoaiHinhVanChuyen').post(checkToken.checkToken, loaiHinhVanChuyen.getListLoaiHinhVanChuyen);
-    app.route('/loaiHinhVanChuyen/delete_LoaiHinhVanChuyen').post(checkToken.checkToken, loaiHinhVanChuyen.deleteLoaiHinhVanChuyen);
+    app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.addLoaiHinhVanChuyen);
+    app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.updateLoaiHinhVanChuyen);
+    app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.getListLoaiHinhVanChuyen);
+    app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.deleteLoaiHinhVanChuyen);
 
 }

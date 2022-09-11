@@ -3,8 +3,16 @@ const Op = require('sequelize').Op;
 const Result = require('../constants/result');
 var moment = require('moment');
 var mLoaiNhanVien = require('../model/loaiNhanVien')
+var mNhanVien = require('../model/nhanVien')
 var database = require('../database');
 async function deleteRelationshipLoaiNhanVien(db, listID) {
+    await mNhanVien(db).update({
+        IDLoaiNhanVien: null
+    }, {
+        where: {
+            IDLoaiNhanVien: {[Op.in]: listID}
+        }
+    })
     await mLoaiNhanVien(db).destroy({
         where: {
             ID: {
@@ -106,7 +114,7 @@ module.exports = {
     },
     // delete_LoaiNhanVien
     deleteLoaiNhanVien: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
@@ -128,7 +136,7 @@ module.exports = {
     },
     // get_list_LoaiNhanVien
     getListLoaiNhanVien: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {

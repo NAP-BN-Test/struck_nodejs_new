@@ -43,7 +43,6 @@ module.exports = {
     },
 
     toDatetimeDay: function (time) {
-        console.log(time);
         if (time) {
             var day = dayInWeek[moment(time).days()];
             return day + ", " + moment(time).format('DD/MM/YYYY');
@@ -155,5 +154,9 @@ module.exports = {
             obj[field.key] = field.value
         }
         return obj;
+    },
+    formatDatime(datetime){
+        var result = moment(datetime).format('YYYY-MM-DD HH:mm:ss.SSS')
+        return result == 'Invalid date' ? null : result
     }
 }
