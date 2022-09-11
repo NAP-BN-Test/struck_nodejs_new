@@ -318,6 +318,44 @@
                 }]
             }
         },
+        "/cutomers": {
+            "get": {
+                "parameters": [{
+                    "name": "id",
+                    "description": "Id",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "",
+                "description": "Lay chi tiet khach hang",
+                "operationId": "Lay chi tiet khach hang",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/outputBasic"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
         "/companycar": {
             "post": {
                 "tags": [
@@ -1637,6 +1675,17 @@
                     "type": "string"
                 },
                 "tenDayDu": {
+                    "type": "string"
+                }
+            }
+        },
+        "detail": {
+            "xml": {
+                "name": "Product"
+            },
+            "type": "object",
+            "properties": {
+                "id": {
                     "type": "string"
                 }
             }

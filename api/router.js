@@ -8,6 +8,7 @@ module.exports = function(app) {
 
     var customerCtl = require('./controllers/customer');
     app.route('/cutomer').get(checkToken.checkToken, customerCtl.getListtblKhachHang);
+    app.route('/cutomers').get(checkToken.checkToken, customerCtl.detailtblKhachHang);
     app.route('/cutomer').post(checkToken.checkToken, customerCtl.addtblKhachHang);
     app.route('/cutomer').put(checkToken.checkToken, customerCtl.updatetblKhachHang);
     app.route('/cutomer').delete(checkToken.checkToken, customerCtl.deletetblKhachHang);

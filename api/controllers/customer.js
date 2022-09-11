@@ -19,14 +19,14 @@ module.exports = {
     deleteRelationshiptblKhachHang,
     //  get_detail_tblKhachHang
     detailtblKhachHang: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
                     let tblKhachHang = mtblKhachHang(db);
                     tblKhachHang.belongsTo(mtblPhuongThucThanhToan(db), { foreignKey: 'IDPhuongPhapThanhToan', sourceKey: 'IDPhuongPhapThanhToan', as: 'phuongthutt' })
 
-                    tblKhachHang(db).findOne({
+                    tblKhachHang.findOne({
                         where: { ID: body.id },
                         include: [{
                             model: mtblPhuongThucThanhToan(db),
@@ -95,7 +95,7 @@ module.exports = {
                         IDPhuongPhapThanhToan: body.idPhuongPhapThanhToan ? body.idPhuongPhapThanhToan : null,
                         HanMuc: body.hanMuc ? body.hanMuc : null,
                         StartDatePay: body.startDatePay ? Modules.formatDatime(body.startDatePay) : null,
-                        EndDatePay: body.endDatePay ? Modules.formatDatime(body.endDatePay): null,
+                        EndDatePay: body.endDatePay ? Modules.formatDatime(body.endDatePay) : null,
                         Deleted: body.deleted ? body.deleted : null,
                         CreateDate: body.createDate ? Modules.formatDatime(body.createDate) : null,
                         UpdateDate: body.updateDate ? Modules.formatDatime(body.updateDate) : null,
@@ -237,7 +237,7 @@ module.exports = {
                     let stt = 1;
                     let tblKhachHang = mtblKhachHang(db);
                     tblKhachHang.belongsTo(mtblPhuongThucThanhToan(db), { foreignKey: 'IDPhuongPhapThanhToan', sourceKey: 'IDPhuongPhapThanhToan', as: 'phuongthutt' })
-                    tblKhachHang(db).findAll({
+                    tblKhachHang.findAll({
                         offset: Number(body.itemPerPage) * (Number(body.page) - 1),
                         limit: Number(body.itemPerPage),
                         order: [
