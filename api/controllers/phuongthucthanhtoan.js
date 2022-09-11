@@ -17,7 +17,7 @@ module.exports = {
     deleteRelationshipPhuongThucThanhToan,
     //  get_detail_PhuongThucThanhToan
     detailPhuongThucThanhToan: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {

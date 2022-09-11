@@ -471,6 +471,44 @@
                 }]
             }
         },
+        "/companycars": {
+            "get": {
+                "parameters": [{
+                    "name": "id",
+                    "description": "Id",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Company car"
+                ],
+                "summary": "",
+                "description": "Lay chi xe cong ty",
+                "operationId": "Lay chi xe cong ty",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/outputBasic"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
         "/shelltype": {
             "post": {
                 "tags": [
@@ -588,6 +626,44 @@
                         "description": "Xoa thanh cong",
                         "schema": {
                             "$ref": "#/definitions/outputBasic"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/shelltypes": {
+            "get": {
+                "parameters": [{
+                    "name": "id",
+                    "description": "Id",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Shell type"
+                ],
+                "summary": "",
+                "description": "Lay chi loai vo",
+                "operationId": "Lay chi loai vo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/outputBasic"
+                                }
+                            }
                         }
                     }
                 },
@@ -846,6 +922,44 @@
                 }]
             }
         },
+        "/carriers/id": {
+            "get": {
+                "parameters": [{
+                    "name": "id",
+                    "description": "Id",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Car type"
+                ],
+                "summary": "",
+                "description": "Lay chi tiet hang tau ",
+                "operationId": "Lay chi tiet hang tau ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/outputBasic"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
         "/ordertype": {
             "post": {
                 "tags": [
@@ -963,6 +1077,44 @@
                         "description": "Xoa thanh cong",
                         "schema": {
                             "$ref": "#/definitions/outputBasic"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/ordertypes": {
+            "get": {
+                "parameters": [{
+                    "name": "id",
+                    "description": "Id",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Order type"
+                ],
+                "summary": "",
+                "description": "Lay chi tiet loai hinh van chuyen ",
+                "operationId": "Lay chi tiet loai hinh van chuyen ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/outputBasic"
+                                }
+                            }
                         }
                     }
                 },
@@ -1096,6 +1248,44 @@
                 }]
             }
         },
+        "/paymentmethods/id": {
+            "get": {
+                "parameters": [{
+                    "name": "id",
+                    "description": "Id",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Payment methods"
+                ],
+                "summary": "",
+                "description": "Lay chi tiet phuong thuc thanh toan ",
+                "operationId": "Lay chi tiet phuong thuc thanh toan ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/outputBasic"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
         "/stafftype": {
             "post": {
                 "tags": [
@@ -1221,6 +1411,44 @@
                 }]
             }
         },
+        "/stafftypes": {
+            "get": {
+                "parameters": [{
+                    "name": "id",
+                    "description": "Id",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Staff type"
+                ],
+                "summary": "",
+                "description": "Lay chi tiet kieu nhan vien ",
+                "operationId": "Lay chi tiet kieu nhan vien ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/outputBasic"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
         "/currency": {
             "post": {
                 "tags": [
@@ -1338,6 +1566,44 @@
                         "description": "Xoa thanh cong",
                         "schema": {
                             "$ref": "#/definitions/outputBasic"
+                        }
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/currencys": {
+            "get": {
+                "parameters": [{
+                    "name": "id",
+                    "description": "Id",
+                    "type": "integer",
+                    "in": "query"
+                }],
+                "tags": [
+                    "Currency"
+                ],
+                "summary": "",
+                "description": "Lay chi tiet tien te ",
+                "operationId": "Lay chi tiet tien te ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lấy dữ liệu thành công",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "result": {
+                                    "$ref": "#/definitions/outputBasic"
+                                }
+                            }
                         }
                     }
                 },

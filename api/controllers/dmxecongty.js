@@ -17,7 +17,7 @@ module.exports = {
     deleteRelationshipDMXeCongTy,
     //  get_detail_DMXeCongTy
     detailDMXeCongTy: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {

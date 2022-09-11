@@ -8,7 +8,8 @@ async function deleteRelationshiptblTienTe(db, listID) {
     await mtblTienTe(db).destroy({
         where: {
             ID: {
-                [Op.in]: listID }
+                [Op.in]: listID
+            }
         }
     })
 }
@@ -16,7 +17,7 @@ module.exports = {
     deleteRelationshiptblTienTe,
     //  get_detail_tblTienTeapi
     detailtblTienTe: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {

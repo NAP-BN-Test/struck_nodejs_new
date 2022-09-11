@@ -10,7 +10,8 @@ async function deleteRelationshipLoaiNhanVien(db, listID) {
         IDLoaiNhanVien: null
     }, {
         where: {
-            IDLoaiNhanVien: {[Op.in]: listID}
+            IDLoaiNhanVien: {
+                [Op.in]: listID }
         }
     })
     await mLoaiNhanVien(db).destroy({
@@ -25,7 +26,7 @@ module.exports = {
     deleteRelationshipLoaiNhanVien,
     //  get_detail_LoaiNhanVien
     detailLoaiNhanVien: (req, res) => {
-        let body = req.body;
+        let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {

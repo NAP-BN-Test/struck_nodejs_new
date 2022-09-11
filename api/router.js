@@ -18,6 +18,7 @@ module.exports = function(app) {
     app.route('/shelltype').put(checkToken.checkToken, loaiVo.updateLoaiVo);
     app.route('/shelltype').delete(checkToken.checkToken, loaiVo.deleteLoaiVo);
     app.route('/shelltype').get(checkToken.checkToken, loaiVo.getListLoaiVo);
+    app.route('/shelltypes').get(checkToken.checkToken, loaiVo.detailLoaiVo);
     // app.route('/tiretype').get(checkToken.checkToken, loaiVo.getListNameLoaiVo);
 
     var loaiXe = require('./controllers/loaixe');
@@ -25,6 +26,7 @@ module.exports = function(app) {
     app.route('/cartype').put(checkToken.checkToken, loaiXe.updateLoaiXe);
     app.route('/cartype').delete(checkToken.checkToken, loaiXe.deleteLoaiXe);
     app.route('/cartype').get(checkToken.checkToken, loaiXe.getListLoaiXe);
+    app.route('/cartypes').get(checkToken.checkToken, loaiXe.detailLoaiXe);
     // app.route('typecar').get(checkToken.checkToken, loaiXe.getListNameLoaiXe);
 
     var dmXeCongTy = require('./controllers/dmxecongty');
@@ -32,6 +34,7 @@ module.exports = function(app) {
     app.route('/companycar').put(checkToken.checkToken, dmXeCongTy.updateDMXeCongTy);
     app.route('/companycar').delete(checkToken.checkToken, dmXeCongTy.deleteDMXeCongTy);
     app.route('/companycar').get(checkToken.checkToken, dmXeCongTy.getListDMXeCongTy);
+    app.route('/companycars').get(checkToken.checkToken, dmXeCongTy.detailDMXeCongTy);
     // app.route('companycar').get(checkToken.checkToken, dmXeCongTy.getListNameDMXeCongTy);
 
     var hangTau = require('./controllers/hangtau');
@@ -39,6 +42,7 @@ module.exports = function(app) {
     app.route('/carriers').put(checkToken.checkToken, hangTau.updateHangTau);
     app.route('/carriers').delete(checkToken.checkToken, hangTau.deleteHangTau);
     app.route('/carriers').get(checkToken.checkToken, hangTau.getListHangTau);
+    app.route('/carriers/id').get(checkToken.checkToken, hangTau.detailHangTau);
     // app.route('/carriers').post(checkToken.checkToken, hangTau.getListNameHangTau);
 
     var phuongThucThanhToan = require('./controllers/phuongthucthanhtoan');
@@ -46,6 +50,7 @@ module.exports = function(app) {
     app.route('/paymentmethods').put(checkToken.checkToken, phuongThucThanhToan.updatePhuongThucThanhToan);
     app.route('/paymentmethods').delete(checkToken.checkToken, phuongThucThanhToan.deletePhuongThucThanhToan);
     app.route('/paymentmethods').get(checkToken.checkToken, phuongThucThanhToan.getListPhuongThucThanhToan);
+    app.route('/paymentmethods/id').get(checkToken.checkToken, phuongThucThanhToan.detailPhuongThucThanhToan);
     // app.route('/ordertype').post(checkToken.checkToken, phuongThucThanhToan.getListNamePhuongThucThanhToan);
 
     var loaiNhanVien = require('./controllers/loainhanvien');
@@ -53,18 +58,21 @@ module.exports = function(app) {
     app.route('/stafftype').put(checkToken.checkToken, loaiNhanVien.updateLoaiNhanVien);
     app.route('/stafftype').delete(checkToken.checkToken, loaiNhanVien.deleteLoaiNhanVien);
     app.route('/stafftype').get(checkToken.checkToken, loaiNhanVien.getListLoaiNhanVien);
+    app.route('/stafftypes').get(checkToken.checkToken, loaiNhanVien.detailLoaiNhanVien);
     // app.route('/stafftype').get(checkToken.checkToken, loaiNhanVien.getListNameLoaiNhanVien);
 
     var loaiHinhVanChuyen = require('./controllers/loaihinhvanchuyen');
     app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.addLoaiHinhVanChuyen);
-    app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.updateLoaiHinhVanChuyen);
-    app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.getListLoaiHinhVanChuyen);
-    app.route('/ordertype').post(checkToken.checkToken, loaiHinhVanChuyen.deleteLoaiHinhVanChuyen);
+    app.route('/ordertype').put(checkToken.checkToken, loaiHinhVanChuyen.updateLoaiHinhVanChuyen);
+    app.route('/ordertype').get(checkToken.checkToken, loaiHinhVanChuyen.getListLoaiHinhVanChuyen);
+    app.route('/ordertype').delete(checkToken.checkToken, loaiHinhVanChuyen.deleteLoaiHinhVanChuyen);
+    app.route('/ordertypes').get(checkToken.checkToken, loaiHinhVanChuyen.detailLoaiHinhVanChuyen);
 
     var ctlTienTe = require('./controllers/ctlTienTe');
     app.route('/currency').post(checkToken.checkToken, ctlTienTe.addtblTienTe);
     app.route('/currency').put(checkToken.checkToken, ctlTienTe.updatetblTienTe);
     app.route('/currency').get(checkToken.checkToken, ctlTienTe.getListtblTienTe);
+    app.route('/currencys').get(checkToken.checkToken, ctlTienTe.detailtblTienTe);
     app.route('/currency').delete(checkToken.checkToken, ctlTienTe.deletetblTienTe);
 
 }
