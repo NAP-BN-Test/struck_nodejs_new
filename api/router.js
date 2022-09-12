@@ -5,8 +5,9 @@ module.exports = function(app) {
     app.route('/auth/loginDB').post(login.loginDB);
     app.route('/auth/changePassword').patch(login.changePassword);
     app.route('/auth/CustomerDB').get(login.getListCustomerDB);
-
     app.route('/auth/decodeToken').get(checkToken.decodeToken);
+
+    app.route('/database').post(checkToken.checkToken, login.createDatabase);
 
     var customerCtl = require('./controllers/customer');
     app.route('/cutomer').get(checkToken.checkToken, customerCtl.getListtblKhachHang);

@@ -9,6 +9,10 @@ module.exports = {
         status: Constant.STATUS.FAIL,
         message: Constant.MESSAGE.DATA_FAIL
     },
+    CREATE_DB_FAIL: {
+        status: Constant.STATUS.FAIL,
+        message: Constant.MESSAGE.CREATE_DB_FAIL
+    },
 
     NO_DATA_RESULT: {
         status: Constant.STATUS.FAIL,
@@ -40,5 +44,3 @@ module.exports = {
         message: Constant.MESSAGE.INVALID_USER
     },
 }
-
-

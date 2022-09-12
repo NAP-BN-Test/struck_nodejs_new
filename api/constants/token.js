@@ -9,7 +9,6 @@ let checkToken = (req, res, next) => {
             // Remove Bearer from string
             token = token.slice(7, token.length);
         }
-        console.log(token);
         jwt.verify(token, 'struck2022*#', (err, decoded) => {
             if (err) {
                 return res.json({
@@ -44,7 +43,6 @@ let decodeToken = (req, res) => {
                     message: 'Token is not valid'
                 });
             } else {
-                console.log(decoded);
                 var result = {
                     obj: decoded,
                     status: Constant.STATUS.SUCCESS,

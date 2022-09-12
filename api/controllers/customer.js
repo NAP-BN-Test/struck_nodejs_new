@@ -6,6 +6,8 @@ var moment = require('moment');
 var mtblKhachHang = require('../model/khachHang')
 var mtblPhuongThucThanhToan = require('../model/phuongthucthanhtoan')
 var database = require('../database');
+var fs = require('fs');
+var path = require('path');
 async function deleteRelationshiptblKhachHang(db, listID) {
     await mtblKhachHang(db).destroy({
         where: {
@@ -326,5 +328,5 @@ module.exports = {
                 res.json(Constant.MESSAGE.USER_FAIL)
             }
         })
-    }
+    },
 }
