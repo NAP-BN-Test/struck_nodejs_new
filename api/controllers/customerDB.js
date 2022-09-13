@@ -2,10 +2,10 @@ const Constant = require('../constants/constant');
 const Op = require('sequelize').Op;
 const Result = require('../constants/result');
 var moment = require('moment');
-var mLoaiHinhVanChuyen = require('../model/loaiHinhVanChuyen')
+var mCustomerDB = require('../model/customerDB')
 var database = require('../database');
-async function deleteRelationshipLoaiHinhVanChuyen(db, listID) {
-    await mLoaiHinhVanChuyen(db).destroy({
+async function deleteRelationshipCustomerDB(db, listID) {
+    await mCustomerDB(db).destroy({
         where: {
             ID: {
                 [Op.in]: listID
@@ -14,19 +14,23 @@ async function deleteRelationshipLoaiHinhVanChuyen(db, listID) {
     })
 }
 module.exports = {
-    deleteRelationshipLoaiHinhVanChuyen,
-    //  get_detail_LoaiHinhVanChuyen
-    detailLoaiHinhVanChuyen: (req, res) => {
+    deleteRelationshipCustomerDB,
+    //  get_detail_CustomerDBapi
+    detailCustomerDB: (req, res) => {
         let body = req.query;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mLoaiHinhVanChuyen(db).findOne({ where: { ID: body.id } }).then(data => {
+                    mCustomerDB(db).findOne({ where: { ID: body.id } }).then(data => {
                         if (data) {
                             var obj = {
                                 id: Number(data.ID),
-                                tenLoaiHinh: data.TenLoaiHinh ? data.TenLoaiHinh : '',
-                                tenVietTat: data.TenVietTat ? data.TenVietTat : '',
+                                userName: data.UserName ? data.UserName : '',
+                                password: data.Password ? data.Password : '',
+                                nameDB: data.NameDB ? data.NameDB : '',
+                                status: data.Status ? data.Status : '',
+                                keyLicense: data.KeyLicense ? data.KeyLicense : '',
+                                keyConnect: data.KeyConnect ? data.KeyConnect : '',
                             }
                             var result = {
                                 obj: obj,
@@ -48,15 +52,20 @@ module.exports = {
             }
         })
     },
-    // add_LoaiHinhVanChuyen
-    addLoaiHinhVanChuyen: (req, res) => {
+    // add_CustomerDBapi
+    addCustomerDB: (req, res) => {
         let body = req.body;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mLoaiHinhVanChuyen(db).create({
-                        TenVietTat: body.tenVietTat ? body.tenVietTat : '',
-                        TenLoaiHinh: body.tenLoaiHinh ? body.tenLoaiHinh : '',
+                    mCustomerDB(db).create({
+                        IDCustomer: body.idCustomer ? body.idCustomer : null,
+                        UserName: body.userName ? body.userName : '',
+                        Password: body.password ? body.password : '',
+                        NameDB: body.nameDB ? body.nameDB : '',
+                        Status: body.status ? body.status : '',
+                        KeyLicense: body.keyLicense ? body.keyLicense : '',
+                        KeyConnect: body.keyConnect ? body.keyConnect : '',
                     }).then(data => {
                         var result = {
                             status: Constant.STATUS.SUCCESS,
@@ -73,18 +82,32 @@ module.exports = {
             }
         })
     },
-    // update_LoaiHinhVanChuyen
-    updateLoaiHinhVanChuyen: (req, res) => {
+    // update_CustomerDBapi
+    updateCustomerDB: (req, res) => {
         let body = req.body;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
                     let update = [];
-                    if (body.tenVietTat || body.tenVietTat === '')
-                        update.push({ key: 'TenVietTat', value: body.tenVietTat });
-                    if (body.tenLoaiHinh || body.tenLoaiHinh === '')
-                        update.push({ key: 'TenLoaiHinh', value: body.tenLoaiHinh });
-                    database.updateTable(update, mLoaiHinhVanChuyen(db), body.id).then(response => {
+                    if (body.userName || body.userName === '')
+                        update.push({ key: 'UserName', value: body.userName });
+                    if (body.password || body.password === '')
+                        update.push({ key: 'Password', value: body.password });
+                    if (body.nameDB || body.nameDB === '')
+                        update.push({ key: 'NameDB', value: body.nameDB });
+                    if (body.status || body.status === '')
+                        update.push({ key: 'Status', value: body.status });
+                    if (body.keyLicense || body.keyLicense === '')
+                        update.push({ key: 'KeyLicense', value: body.keyLicense });
+                    if (body.keyConnect || body.keyConnect === '')
+                        update.push({ key: 'KeyConnect', value: body.keyConnect });
+                    if (body.idCustomer || body.idCustomer === '') {
+                        if (body.idCustomer === '')
+                            update.push({ key: 'IDCustomer', value: null });
+                        else
+                            update.push({ key: 'IDCustomer', value: body.idCustomer });
+                    }
+                    database.updateTable(update, mCustomerDB(db), body.id).then(response => {
                         if (response == 1) {
                             res.json(Result.ACTION_SUCCESS);
                         } else {
@@ -100,14 +123,14 @@ module.exports = {
             }
         })
     },
-    // delete_LoaiHinhVanChuyen
-    deleteLoaiHinhVanChuyen: (req, res) => {
+    // delete_CustomerDBapi
+    deleteCustomerDB: (req, res) => {
         let body = req.body;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    let listID = body.listID.split(',');
-                    await deleteRelationshipLoaiHinhVanChuyen(db, listID);
+                    let listID = JSON.parse(body.listID);
+                    await deleteRelationshipCustomerDB(db, listID);
                     var result = {
                         status: Constant.STATUS.SUCCESS,
                         message: Constant.MESSAGE.ACTION_SUCCESS,
@@ -122,15 +145,14 @@ module.exports = {
             }
         })
     },
-    // get_list_LoaiHinhVanChuyen
-    getListLoaiHinhVanChuyen: (req, res) => {
+    // get_list_CustomerDBapi
+    getListCustomerDB: (req, res) => {
         let body = req.body;
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    var whereOjb = [];
                     let stt = 1;
-                    mLoaiHinhVanChuyen(db).findAll({
+                    mCustomerDB(db).findAll({
                         offset: Number(body.itemPerPage) * (Number(body.page) - 1),
                         limit: Number(body.itemPerPage),
                         // where: whereOjb,
@@ -143,13 +165,17 @@ module.exports = {
                             var obj = {
                                 stt: stt,
                                 id: Number(element.ID),
-                                tenLoaiHinh: data.TenLoaiHinh ? data.TenLoaiHinh : '',
-                                tenVietTat: data.TenVietTat ? data.TenVietTat : '',
+                                userName: element.UserName ? element.UserName : '',
+                                password: element.Password ? element.Password : '',
+                                nameDB: element.NameDB ? element.NameDB : '',
+                                status: element.Status ? element.Status : '',
+                                keyLicense: element.KeyLicense ? element.KeyLicense : '',
+                                keyConnect: element.KeyConnect ? element.KeyConnect : '',
                             }
                             array.push(obj);
                             stt += 1;
                         });
-                        var count = await mLoaiHinhVanChuyen(db).count()
+                        var count = await mCustomerDB(db).count()
                         var result = {
                             array: array,
                             status: Constant.STATUS.SUCCESS,
@@ -167,5 +193,5 @@ module.exports = {
                 res.json(Constant.MESSAGE.USER_FAIL)
             }
         })
-    },
+    }
 }

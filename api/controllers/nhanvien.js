@@ -24,7 +24,7 @@ module.exports = {
                     mNhanVien(db).findOne({ where: { ID: body.id } }).then(data => {
                         if (data) {
                             var obj = {
-                                id: data.ID,
+                                id: Number(data.ID),
                                 idLoaiNhanVien: data.IDLoaiNhanVien ? data.IDLoaiNhanVien : null,
                                 tenNhanVien: data.TenNhanVien ? data.TenNhanVien : '',
                                 maNhanVien: data.MaNhanVien ? data.MaNhanVien : '',

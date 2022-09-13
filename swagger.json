@@ -54,6 +54,10 @@
         {
             "name": "Staff",
             "description": "In the system"
+        },
+        {
+            "name": "database",
+            "description": "Create database for customer"
         }
     ],
     "schemes": [
@@ -1843,6 +1847,33 @@
                     "Bearer": []
                 }]
             }
+        },
+        "/database": {
+            "post": {
+                "tags": [
+                    "database"
+                ],
+                "description": "Create database",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "login",
+                    "in": "body",
+                    "description": "Create database",
+                    "schema": {
+                        "$ref": "#/definitions/createDatabase"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Tạo database thành công",
+                        "schema": {
+                            "$ref": "#/definitions/loginOutput"
+                        }
+                    }
+                }
+            }
         }
     },
     "securityDefinitions": {
@@ -2222,6 +2253,56 @@
             "type": "object",
             "properties": {
                 "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "createDatabase": {
+            "xml": {
+                "name": "Product"
+            },
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "shortName": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "fax": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "contactName": {
+                    "type": "string"
+                },
+                "contactPhone": {
+                    "type": "string"
+                },
+                "keyConnect": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                },
+                "keyLicense": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "nameDB": {
+                    "type": "string"
+                },
+                "password": {
                     "type": "string"
                 }
             }

@@ -24,7 +24,7 @@ module.exports = {
                     mPhuongThucThanhToan(db).findOne({ where: { ID: body.id } }).then(data => {
                         if (data) {
                             var obj = {
-                                id: data.ID,
+                                id: Number(data.ID),
                                 tenThanhToan: data.TenThanhToan ? data.TenThanhToan : '',
                                 ghiChu: data.GhiChu ? data.GhiChu : '',
                             }
@@ -142,9 +142,9 @@ module.exports = {
                         data.forEach(element => {
                             var obj = {
                                 stt: stt,
-                                id: data.ID,
-                                tenThanhToan: data.TenThanhToan ? data.TenThanhToan : '',
-                                ghiChu: data.GhiChu ? data.GhiChu : '',
+                                id: Number(element.ID),
+                                tenThanhToan: element.TenThanhToan ? element.TenThanhToan : '',
+                                ghiChu: element.GhiChu ? element.GhiChu : '',
                             }
                             array.push(obj);
                             stt += 1;

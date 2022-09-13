@@ -24,7 +24,7 @@ module.exports = {
                     mHangTau(db).findOne({ where: { ID: body.id } }).then(data => {
                         if (data) {
                             var obj = {
-                                id: data.ID,
+                                id: Number(data.ID),
                                 name: data.Name ? data.Name : '',
                                 beachContainer: data.BeachContainer ? data.BeachContainer : '',
                                 note: data.Note ? data.Note : '',
@@ -154,7 +154,7 @@ module.exports = {
                         data.forEach(element => {
                             var obj = {
                                 stt: stt,
-                                id: element.ID,
+                                id: Number(element.ID),
                                 name: element.Name ? element.Name : '',
                                 beachContainer: element.BeachContainer ? element.BeachContainer : '',
                                 note: element.Note ? element.Note : '',

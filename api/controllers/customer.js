@@ -38,7 +38,7 @@ module.exports = {
                     }).then(data => {
                         if (data) {
                             var obj = {
-                                id: data.ID ? data.ID : null,
+                                id: data.ID ? Number(data.ID) : null,
                                 maKhachHang: data.MaKhachHang ? data.MaKhachHang : '',
                                 tenKhachHang: data.TenKhachHang ? data.TenKhachHang : '',
                                 tenVietTat: data.TenVietTat ? data.TenVietTat : '',
@@ -83,7 +83,6 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    console.log(body);
                     mtblKhachHang(db).create({
                         MaKhachHang: body.maKhachHang ? body.maKhachHang : null,
                         TenKhachHang: body.tenKhachHang ? body.tenKhachHang : null,
@@ -255,7 +254,7 @@ module.exports = {
                         data.forEach(element => {
                             var obj = {
                                 stt: stt,
-                                id: element.ID ? element.ID : null,
+                                id: element.ID ? Number(element.ID) : null,
                                 maKhachHang: element.MaKhachHang ? element.MaKhachHang : '',
                                 tenKhachHang: element.TenKhachHang ? element.TenKhachHang : '',
                                 tenVietTat: element.TenVietTat ? element.TenVietTat : '',

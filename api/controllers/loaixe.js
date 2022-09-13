@@ -24,7 +24,7 @@ module.exports = {
                     mLoaiXe(db).findOne({ where: { ID: body.id } }).then(data => {
                         if (data) {
                             var obj = {
-                                id: data.ID,
+                                id: Number(data.ID),
                                 name: data.Name ? data.Name : '',
                                 note: data.Note ? data.Note : '',
                                 deleted: data.Deleted ? data.Deleted : null,

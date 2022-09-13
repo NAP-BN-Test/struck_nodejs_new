@@ -24,7 +24,7 @@ module.exports = {
                     mDMXeCongTy(db).findOne({ where: { ID: body.id } }).then(data => {
                         if (data) {
                             var obj = {
-                                id: data.ID,
+                                id: Number(data.ID),
                                 bienSoXe: data.BienSoXe ? data.BienSoXe : '',
                                 loaiDauKeo: data.LoaiDauKeo ? data.LoaiDauKeo : '',
                                 soRoMooc: data.SoRoMooc ? data.SoRoMooc : '',
@@ -198,7 +198,7 @@ module.exports = {
                         data.forEach(element => {
                             var obj = {
                                 stt: stt,
-                                id: element.ID,
+                                id: Number(element.ID),
                                 bienSoXe: element.BienSoXe ? element.BienSoXe : '',
                                 loaiDauKeo: element.LoaiDauKeo ? element.LoaiDauKeo : '',
                                 soRoMooc: element.SoRoMooc ? element.SoRoMooc : '',

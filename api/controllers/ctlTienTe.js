@@ -24,7 +24,7 @@ module.exports = {
                     mtblTienTe(db).findOne({ where: { ID: body.id } }).then(data => {
                         if (data) {
                             var obj = {
-                                id: data.ID,
+                                id: Number(data.ID),
                                 tenVietTat: data.TenVietTat ? data.TenVietTat : '',
                                 tenDayDu: data.TenDayDu ? data.TenDayDu : '',
                             }

@@ -11,7 +11,8 @@ async function deleteRelationshipLoaiNhanVien(db, listID) {
     }, {
         where: {
             IDLoaiNhanVien: {
-                [Op.in]: listID }
+                [Op.in]: listID
+            }
         }
     })
     await mLoaiNhanVien(db).destroy({
@@ -33,7 +34,7 @@ module.exports = {
                     mLoaiNhanVien(db).findOne({ where: { ID: body.id } }).then(data => {
                         if (data) {
                             var obj = {
-                                id: data.ID,
+                                id: Number(data.ID),
                                 maLoaiNhanVien: data.MaLoaiNhanVien ? data.MaLoaiNhanVien : '',
                                 tenLoaiNhanVien: data.TenLoaiNhanVien ? data.TenLoaiNhanVien : '',
                                 ghiChu: data.GhiChu ? data.GhiChu : '',

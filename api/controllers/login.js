@@ -227,7 +227,7 @@ module.exports = {
                             array: array,
                             status: Constant.STATUS.SUCCESS,
                             message: Constant.MESSAGE.ACTION_SUCCESS,
-                            count: count
+                            all: count
                         }
                         res.json(result);
                     })
