@@ -9,7 +9,7 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "103.137.184.193:1004",
+    "host": "localhost:1004",
     "basePath": "/",
     "tags": [{
             "name": "auth",
@@ -2017,10 +2017,10 @@
                     "type": "float"
                 },
                 "startDatePay": {
-                    "type": "string"
+                    "type": "float"
                 },
                 "endDatePay": {
-                    "type": "string"
+                    "type": "float"
                 },
                 "createDate": {
                     "type": "string"

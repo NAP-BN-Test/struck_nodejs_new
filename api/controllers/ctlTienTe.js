@@ -54,16 +54,29 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mtblTienTe(db).create({
-                        TenVietTat: body.tenVietTat ? body.tenVietTat : '',
-                        TenDayDu: body.tenDayDu ? body.tenDayDu : '',
-                    }).then(data => {
-                        var result = {
-                            status: Constant.STATUS.SUCCESS,
-                            message: Constant.MESSAGE.ACTION_SUCCESS,
+                    mtblTienTe(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                TenVietTat: body.tenVietTat
+                            }
                         }
-                        res.json(result);
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            mtblTienTe(db).create({
+                                TenVietTat: body.tenVietTat ? body.tenVietTat : '',
+                                TenDayDu: body.tenDayDu ? body.tenDayDu : '',
+                            }).then(data => {
+                                var result = {
+                                    status: Constant.STATUS.SUCCESS,
+                                    message: Constant.MESSAGE.ACTION_SUCCESS,
+                                }
+                                res.json(result);
+                            })
+                        }
                     })
+
                 } catch (error) {
                     console.log(error);
                     res.json(Result.SYS_ERROR_RESULT)
@@ -84,11 +97,23 @@ module.exports = {
                         update.push({ key: 'TenVietTat', value: body.tenVietTat });
                     if (body.tenDayDu || body.tenDayDu === '')
                         update.push({ key: 'TenDayDu', value: body.tenDayDu });
-                    database.updateTable(update, mtblTienTe(db), body.id).then(response => {
-                        if (response == 1) {
-                            res.json(Result.ACTION_SUCCESS);
-                        } else {
-                            res.json(Result.SYS_ERROR_RESULT);
+                    mtblTienTe(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                TenVietTat: body.tenVietTat,
+                            }
+                        }
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            database.updateTable(update, mtblTienTe(db), body.id).then(response => {
+                                if (response == 1) {
+                                    res.json(Result.ACTION_SUCCESS);
+                                } else {
+                                    res.json(Result.SYS_ERROR_RESULT);
+                                }
+                            })
                         }
                     })
                 } catch (error) {

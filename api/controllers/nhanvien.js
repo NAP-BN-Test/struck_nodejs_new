@@ -61,23 +61,36 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mNhanVien(db).create({
-                        IDLoaiNhanVien: body.idLoaiNhanVien ? body.idLoaiNhanVien : null,
-                        TenNhanVien: body.tenNhanVien ? body.tenNhanVien : '',
-                        MaNhanVien: body.maNhanVien ? body.maNhanVien : '',
-                        PhoneNumber: body.phoneNumber ? body.phoneNumber : '',
-                        Birthday: body.birthday ? body.birthday : null,
-                        Gender: body.gender ? body.gender : '',
-                        Address: body.address ? body.address : '',
-                        Username: body.username ? body.username : '',
-                        Password: body.password ? body.password : '',
-                    }).then(data => {
-                        var result = {
-                            status: Constant.STATUS.SUCCESS,
-                            message: Constant.MESSAGE.ACTION_SUCCESS,
+                    mNhanVien(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                MaNhanVien: body.maNhanVien
+                            }
                         }
-                        res.json(result);
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            mNhanVien(db).create({
+                                IDLoaiNhanVien: body.idLoaiNhanVien ? body.idLoaiNhanVien : null,
+                                TenNhanVien: body.tenNhanVien ? body.tenNhanVien : '',
+                                MaNhanVien: body.maNhanVien ? body.maNhanVien : '',
+                                PhoneNumber: body.phoneNumber ? body.phoneNumber : '',
+                                Birthday: body.birthday ? body.birthday : null,
+                                Gender: body.gender ? body.gender : '',
+                                Address: body.address ? body.address : '',
+                                Username: body.username ? body.username : '',
+                                Password: body.password ? body.password : '',
+                            }).then(data => {
+                                var result = {
+                                    status: Constant.STATUS.SUCCESS,
+                                    message: Constant.MESSAGE.ACTION_SUCCESS,
+                                }
+                                res.json(result);
+                            })
+                        }
                     })
+
                 } catch (error) {
                     console.log(error);
                     res.json(Result.SYS_ERROR_RESULT)
@@ -120,11 +133,23 @@ module.exports = {
                         update.push({ key: 'Username', value: body.username });
                     if (body.password || body.password === '')
                         update.push({ key: 'Password', value: body.password });
-                    database.updateTable(update, mNhanVien(db), body.id).then(response => {
-                        if (response == 1) {
-                            res.json(Result.ACTION_SUCCESS);
-                        } else {
-                            res.json(Result.SYS_ERROR_RESULT);
+                    mNhanVien(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                MaNhanVien: body.maNhanVien,
+                            }
+                        }
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            database.updateTable(update, mNhanVien(db), body.id).then(response => {
+                                if (response == 1) {
+                                    res.json(Result.ACTION_SUCCESS);
+                                } else {
+                                    res.json(Result.SYS_ERROR_RESULT);
+                                }
+                            })
                         }
                     })
                 } catch (error) {

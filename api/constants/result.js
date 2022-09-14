@@ -5,6 +5,10 @@ module.exports = {
         status: Constant.STATUS.FAIL,
         message: Constant.MESSAGE.SYS_ERROR
     },
+    ALERADY_EXIST_DATA: {
+        status: Constant.STATUS.FAIL,
+        message: Constant.MESSAGE.ALERADY_EXIST_DATA
+    },
     ERROR_DATA: {
         status: Constant.STATUS.FAIL,
         message: Constant.MESSAGE.DATA_FAIL

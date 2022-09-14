@@ -67,29 +67,42 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mDMXeCongTy(db).create({
-                        BienSoXe: body.bienSoXe ? body.bienSoXe : '',
-                        LoaiDauKeo: body.loaiDauKeo ? body.loaiDauKeo : '',
-                        SoRoMooc: body.soRoMooc ? body.soRoMooc : '',
-                        LoaiSoMi: body.loaiSoMi ? body.loaiSoMi : '',
-                        GPS: body.gps ? body.gps : '',
-                        TenLaiXe: body.tenLaiXe ? body.tenLaiXe : '',
-                        SoDienThoai: body.soDienThoai ? body.soDienThoai : '',
-                        SoCMT: body.soCMT ? body.soCMT : '',
-                        SoBangLai: body.soBangLai ? body.soBangLai : '',
-                        SoDangKiem: body.soDangKiem ? body.soDangKiem : '',
-                        NgayHetHanDK: body.ngayHetHanDK ? body.ngayHetHanDK : '',
-                        SoBHTNDS: body.soBHTNDS ? body.soBHTNDS : '',
-                        NgayHetHanBHTNDS: body.ngayHetHanBHTNDS ? body.ngayHetHanBHTNDS : '',
-                        DinhMuc: body.dinhMuc ? body.dinhMuc : null,
-                        ThongSoKyThuat: body.thongSoKyThuat ? body.thongSoKyThuat : '',
-                    }).then(data => {
-                        var result = {
-                            status: Constant.STATUS.SUCCESS,
-                            message: Constant.MESSAGE.ACTION_SUCCESS,
+                    mDMXeCongTy(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                BienSoXe: body.bienSoXe
+                            }
                         }
-                        res.json(result);
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            mDMXeCongTy(db).create({
+                                BienSoXe: body.bienSoXe ? body.bienSoXe : '',
+                                LoaiDauKeo: body.loaiDauKeo ? body.loaiDauKeo : '',
+                                SoRoMooc: body.soRoMooc ? body.soRoMooc : '',
+                                LoaiSoMi: body.loaiSoMi ? body.loaiSoMi : '',
+                                GPS: body.gps ? body.gps : '',
+                                TenLaiXe: body.tenLaiXe ? body.tenLaiXe : '',
+                                SoDienThoai: body.soDienThoai ? body.soDienThoai : '',
+                                SoCMT: body.soCMT ? body.soCMT : '',
+                                SoBangLai: body.soBangLai ? body.soBangLai : '',
+                                SoDangKiem: body.soDangKiem ? body.soDangKiem : '',
+                                NgayHetHanDK: body.ngayHetHanDK ? body.ngayHetHanDK : '',
+                                SoBHTNDS: body.soBHTNDS ? body.soBHTNDS : '',
+                                NgayHetHanBHTNDS: body.ngayHetHanBHTNDS ? body.ngayHetHanBHTNDS : '',
+                                DinhMuc: body.dinhMuc ? body.dinhMuc : null,
+                                ThongSoKyThuat: body.thongSoKyThuat ? body.thongSoKyThuat : '',
+                            }).then(data => {
+                                var result = {
+                                    status: Constant.STATUS.SUCCESS,
+                                    message: Constant.MESSAGE.ACTION_SUCCESS,
+                                }
+                                res.json(result);
+                            })
+                        }
                     })
+
                 } catch (error) {
                     console.log(error);
                     res.json(Result.SYS_ERROR_RESULT)
@@ -140,11 +153,23 @@ module.exports = {
                         else
                             update.push({ key: 'DinhMuc', value: body.dinhMuc });
                     }
-                    database.updateTable(update, mDMXeCongTy(db), body.id).then(response => {
-                        if (response == 1) {
-                            res.json(Result.ACTION_SUCCESS);
-                        } else {
-                            res.json(Result.SYS_ERROR_RESULT);
+                    mDMXeCongTy(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                BienSoXe: body.bienSoXe,
+                            }
+                        }
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            database.updateTable(update, mDMXeCongTy(db), body.id).then(response => {
+                                if (response == 1) {
+                                    res.json(Result.ACTION_SUCCESS);
+                                } else {
+                                    res.json(Result.SYS_ERROR_RESULT);
+                                }
+                            })
                         }
                     })
                 } catch (error) {

@@ -83,31 +83,44 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mtblKhachHang(db).create({
-                        MaKhachHang: body.maKhachHang ? body.maKhachHang : null,
-                        TenKhachHang: body.tenKhachHang ? body.tenKhachHang : null,
-                        TenVietTat: body.tenVietTat ? body.tenVietTat : null,
-                        LoaiKhachHang: body.loaiKhachHang ? body.loaiKhachHang : null,
-                        Address: body.address ? body.address : null,
-                        PhoneNumber: body.phoneNumber ? body.phoneNumber : null,
-                        Email: body.email ? body.email : null,
-                        CMT: body.cmt ? body.cmt : null,
-                        SoDuDauKy: body.soDuDauKy ? body.soDuDauKy : null,
-                        IDPhuongPhapThanhToan: body.idPhuongPhapThanhToan ? body.idPhuongPhapThanhToan : null,
-                        HanMuc: body.hanMuc ? body.hanMuc : null,
-                        StartDatePay: body.startDatePay ? Modules.formatDatime(body.startDatePay) : null,
-                        EndDatePay: body.endDatePay ? Modules.formatDatime(body.endDatePay) : null,
-                        Deleted: body.deleted ? body.deleted : null,
-                        CreateDate: body.createDate ? Modules.formatDatime(body.createDate) : null,
-                        UpdateDate: body.updateDate ? Modules.formatDatime(body.updateDate) : null,
-                    }).then(data => {
-                        if (data) {
-                            var result = {
-                                data: data,
-                                status: Constant.STATUS.SUCCESS,
-                                message: Constant.MESSAGE.ACTION_SUCCESS,
+                    mtblKhachHang(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                MaKhachHang: body.maKhachHang,
+                                CMT: body.cmt,
                             }
-                            res.json(result);
+                        }
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            mtblKhachHang(db).create({
+                                MaKhachHang: body.maKhachHang ? body.maKhachHang : null,
+                                TenKhachHang: body.tenKhachHang ? body.tenKhachHang : null,
+                                TenVietTat: body.tenVietTat ? body.tenVietTat : null,
+                                LoaiKhachHang: body.loaiKhachHang ? body.loaiKhachHang : null,
+                                Address: body.address ? body.address : null,
+                                PhoneNumber: body.phoneNumber ? body.phoneNumber : null,
+                                Email: body.email ? body.email : null,
+                                CMT: body.cmt ? body.cmt : null,
+                                SoDuDauKy: body.soDuDauKy ? body.soDuDauKy : null,
+                                IDPhuongPhapThanhToan: body.idPhuongPhapThanhToan ? body.idPhuongPhapThanhToan : null,
+                                HanMuc: body.hanMuc ? body.hanMuc : null,
+                                StartDatePay: body.startDatePay ? Modules.formatDatime(body.startDatePay) : null,
+                                EndDatePay: body.endDatePay ? Modules.formatDatime(body.endDatePay) : null,
+                                Deleted: body.deleted ? body.deleted : null,
+                                CreateDate: body.createDate ? Modules.formatDatime(body.createDate) : null,
+                                UpdateDate: body.updateDate ? Modules.formatDatime(body.updateDate) : null,
+                            }).then(data => {
+                                if (data) {
+                                    var result = {
+                                        data: data,
+                                        status: Constant.STATUS.SUCCESS,
+                                        message: Constant.MESSAGE.ACTION_SUCCESS,
+                                    }
+                                    res.json(result);
+                                }
+                            })
                         }
                     })
                 } catch (error) {
@@ -190,13 +203,27 @@ module.exports = {
                         else
                             update.push({ key: 'UpdateDate', value: body.updateDate });
                     }
-                    database.updateTable(update, mtblKhachHang(db), body.id).then(response => {
-                        if (response == 1) {
-                            res.json(Result.ACTION_SUCCESS);
-                        } else {
-                            res.json(Result.SYS_ERROR_RESULT);
+                    mtblKhachHang(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                MaKhachHang: body.maKhachHang,
+                                CMT: body.cmt,
+                            }
+                        }
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            database.updateTable(update, mtblKhachHang(db), body.id).then(response => {
+                                if (response == 1) {
+                                    res.json(Result.ACTION_SUCCESS);
+                                } else {
+                                    res.json(Result.SYS_ERROR_RESULT);
+                                }
+                            })
                         }
                     })
+
                 } catch (error) {
                     console.log(error);
                     res.json(Result.SYS_ERROR_RESULT)

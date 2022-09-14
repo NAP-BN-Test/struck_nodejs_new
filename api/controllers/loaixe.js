@@ -55,17 +55,30 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mLoaiXe(db).create({
-                        Note: body.note ? body.note : '',
-                        Name: body.name ? body.name : '',
-                        Deleted: body.deleted ? body.deleted : null,
-                    }).then(data => {
-                        var result = {
-                            status: Constant.STATUS.SUCCESS,
-                            message: Constant.MESSAGE.ACTION_SUCCESS,
+                    mLoaiXe(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                Name: body.name
+                            }
                         }
-                        res.json(result);
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            mLoaiXe(db).create({
+                                Note: body.note ? body.note : '',
+                                Name: body.name ? body.name : '',
+                                Deleted: body.deleted ? body.deleted : null,
+                            }).then(data => {
+                                var result = {
+                                    status: Constant.STATUS.SUCCESS,
+                                    message: Constant.MESSAGE.ACTION_SUCCESS,
+                                }
+                                res.json(result);
+                            })
+                        }
                     })
+
                 } catch (error) {
                     console.log(error);
                     res.json(Result.SYS_ERROR_RESULT)
@@ -92,11 +105,23 @@ module.exports = {
                         else
                             update.push({ key: 'Deleted', value: body.deleted });
                     }
-                    database.updateTable(update, mLoaiXe(db), body.id).then(response => {
-                        if (response == 1) {
-                            res.json(Result.ACTION_SUCCESS);
-                        } else {
-                            res.json(Result.SYS_ERROR_RESULT);
+                    mLoaiXe(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                Name: body.name,
+                            }
+                        }
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            database.updateTable(update, mLoaiXe(db), body.id).then(response => {
+                                if (response == 1) {
+                                    res.json(Result.ACTION_SUCCESS);
+                                } else {
+                                    res.json(Result.SYS_ERROR_RESULT);
+                                }
+                            })
                         }
                     })
                 } catch (error) {

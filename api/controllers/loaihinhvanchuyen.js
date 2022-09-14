@@ -54,15 +54,27 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mLoaiHinhVanChuyen(db).create({
-                        TenVietTat: body.tenVietTat ? body.tenVietTat : '',
-                        TenLoaiHinh: body.tenLoaiHinh ? body.tenLoaiHinh : '',
-                    }).then(data => {
-                        var result = {
-                            status: Constant.STATUS.SUCCESS,
-                            message: Constant.MESSAGE.ACTION_SUCCESS,
+                    mLoaiHinhVanChuyen(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                TenVietTat: body.tenVietTat
+                            }
                         }
-                        res.json(result);
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            mLoaiHinhVanChuyen(db).create({
+                                TenVietTat: body.tenVietTat ? body.tenVietTat : '',
+                                TenLoaiHinh: body.tenLoaiHinh ? body.tenLoaiHinh : '',
+                            }).then(data => {
+                                var result = {
+                                    status: Constant.STATUS.SUCCESS,
+                                    message: Constant.MESSAGE.ACTION_SUCCESS,
+                                }
+                                res.json(result);
+                            })
+                        }
                     })
                 } catch (error) {
                     console.log(error);
@@ -84,11 +96,23 @@ module.exports = {
                         update.push({ key: 'TenVietTat', value: body.tenVietTat });
                     if (body.tenLoaiHinh || body.tenLoaiHinh === '')
                         update.push({ key: 'TenLoaiHinh', value: body.tenLoaiHinh });
-                    database.updateTable(update, mLoaiHinhVanChuyen(db), body.id).then(response => {
-                        if (response == 1) {
-                            res.json(Result.ACTION_SUCCESS);
-                        } else {
-                            res.json(Result.SYS_ERROR_RESULT);
+                    mLoaiHinhVanChuyen(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                TenVietTat: body.tenVietTat,
+                            }
+                        }
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            database.updateTable(update, mLoaiHinhVanChuyen(db), body.id).then(response => {
+                                if (response == 1) {
+                                    res.json(Result.ACTION_SUCCESS);
+                                } else {
+                                    res.json(Result.SYS_ERROR_RESULT);
+                                }
+                            })
                         }
                     })
                 } catch (error) {

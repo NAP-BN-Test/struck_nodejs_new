@@ -58,20 +58,34 @@ module.exports = {
         database.connectDatabase().then(async db => {
             if (db) {
                 try {
-                    mCustomerDB(db).create({
-                        IDCustomer: body.idCustomer ? body.idCustomer : null,
-                        UserName: body.userName ? body.userName : '',
-                        Password: body.password ? body.password : '',
-                        NameDB: body.nameDB ? body.nameDB : '',
-                        Status: body.status ? body.status : '',
-                        KeyLicense: body.keyLicense ? body.keyLicense : '',
-                        KeyConnect: body.keyConnect ? body.keyConnect : '',
-                    }).then(data => {
-                        var result = {
-                            status: Constant.STATUS.SUCCESS,
-                            message: Constant.MESSAGE.ACTION_SUCCESS,
+                    mCustomerDB(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                UserName: body.userName,
+                                NameDB: body.nameDB
+                            }
                         }
-                        res.json(result);
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+
+                        else {
+                            mCustomerDB(db).create({
+                                IDCustomer: body.idCustomer ? body.idCustomer : null,
+                                UserName: body.userName ? body.userName : '',
+                                Password: body.password ? body.password : '',
+                                NameDB: body.nameDB ? body.nameDB : '',
+                                Status: body.status ? body.status : '',
+                                KeyLicense: body.keyLicense ? body.keyLicense : '',
+                                KeyConnect: body.keyConnect ? body.keyConnect : '',
+                            }).then(data => {
+                                var result = {
+                                    status: Constant.STATUS.SUCCESS,
+                                    message: Constant.MESSAGE.ACTION_SUCCESS,
+                                }
+                                res.json(result);
+                            })
+                        }
                     })
                 } catch (error) {
                     console.log(error);
@@ -107,11 +121,24 @@ module.exports = {
                         else
                             update.push({ key: 'IDCustomer', value: body.idCustomer });
                     }
-                    database.updateTable(update, mCustomerDB(db), body.id).then(response => {
-                        if (response == 1) {
-                            res.json(Result.ACTION_SUCCESS);
-                        } else {
-                            res.json(Result.SYS_ERROR_RESULT);
+                    mCustomerDB(db).findOne({
+                        where: {
+                            [Op.or]: {
+                                UserName: body.userName,
+                                NameDB: body.nameDB,
+                            }
+                        }
+                    }).then(data => {
+                        if (data)
+                            res.json(Result.ALERADY_EXIST_DATA);
+                        else {
+                            database.updateTable(update, mCustomerDB(db), body.id).then(response => {
+                                if (response == 1) {
+                                    res.json(Result.ACTION_SUCCESS);
+                                } else {
+                                    res.json(Result.SYS_ERROR_RESULT);
+                                }
+                            })
                         }
                     })
                 } catch (error) {

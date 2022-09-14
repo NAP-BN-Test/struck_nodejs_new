@@ -14,6 +14,7 @@ module.exports = {
         USERNAME_PASS_INCORRECT: "Tài khoản hoặc mật khẩu không chính xác",
         USER_FAIL: "ID User không chính xác. Vui lòng kiểm tra lại hoặc liên hệ với admin.",
         CREATE_DB_FAIL: "Tạo cơ cở dữ liệu không thành công. Vui lòng thử lại sau!",
+        ALERADY_EXIST_DATA: "Dữ liệu đã tồn tại. Vui lòng kiểm tra lại!",
     },
 
     USER_ROLE: {
